@@ -1,0 +1,26 @@
+<mat-card>
+    <mat-card-content>
+        Tell us who is your favorite artist on Spotify.
+    </mat-card-content>
+    <form>
+        <mat-form-field class="width-input">
+            <input matInput placeholder="Search a Spotify artist..." (keyup)="searchArtist()" [(ngModel)]="searchStr" name="artist">
+        </mat-form-field>
+    </form>
+    <br>
+    <mat-divider></mat-divider>
+    <div *ngIf="artists">
+        <div *ngFor="let artist of artists">
+            <mat-card class="example-card">
+                <mat-card-header>
+
+                    <mat-card-title><a routerLink="/search-artist/{{artist.id}}">{{artist.name}}</a></mat-card-title>
+                    <div>
+                        <strong *ngIf="artist.genres.length > 0">Genres: </strong>
+                        <span *ngFor="let genre of artist.genres">{{genre}}</span>
+                    </div>
+                </mat-card-header>
+            </mat-card>
+        </div>
+    </div>
+</mat-card>

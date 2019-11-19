@@ -1,0 +1,17 @@
+.big-size {
+    font-size: 25px;
+    font-weight: 10px
+}
+
+.example-card {
+    max-width: 700px;
+}
+
+.card-album {
+    max-width: 350px
+}
+
+.classement {
+    font-weight: 25px;
+    font-size: 50px
+}

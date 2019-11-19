@@ -1,0 +1,64 @@
+<div *ngIf="artist">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>{{artist.name}}</mat-card-title>
+            <mat-card-subtitle>{{artist.genres[0]}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="{{artist.images[0].url}}" alt="Image of the artist">
+        <mat-card-content>
+            <p class="big-size">Total Followers: {{artist.followers.total}}</p><br>
+        </mat-card-content>
+        <mat-card-actions>
+
+            <button mat-raised-button (click)="getTopTrack()" *ngIf="!displayTopTrack">Top Tracks of the artist</button>
+            <button mat-raised-button (click)="hideTopTrack()" *ngIf="displayTopTrack">Hide Top Tracks</button>
+            <button mat-raised-button color="primary" (click)="getDiscography()" *ngIf="!displayDiscography">Discography</button>
+            <button mat-raised-button color="primary" (click)="hideDiscography()" *ngIf="displayDiscography">Hide the Discography</button>
+            <button mat-raised-button color="accent" (click)="getRelated()" *ngIf="!displaySimilar">Similar Artists</button>
+            <button mat-raised-button color="accent" (click)="hideRelated()" *ngIf="displaySimilar">Hide Similar Artists</button>
+            <button mat-raised-button color="warn" routerLink="/search-artist">Back</button>
+        </mat-card-actions>
+        <br>
+    </mat-card>
+
+    <mat-card>
+        <div *ngIf="displayDiscography">
+            <h2>Discography</h2>
+            <mat-card class="card-album" *ngFor="let album of albums">
+                <mat-card-header>
+
+                    <mat-card-title>{{album.name}}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image src="{{album.images[0].url}}" alt="Album of the artist">
+            </mat-card>
+        </div>
+        <div *ngIf="displaySimilar">
+            <h2>Related Artists</h2>
+            <mat-card class="card-album" *ngFor="let relatedArtist of relatedArtists; let i = index">
+                <div *ngIf="i < 5">
+                    <mat-card-header>
+                        <mat-card-title>{{relatedArtist.name}}</mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image src="{{relatedArtist.images[0].url}}" alt="Similar">
+                </div>
+            </mat-card>
+        </div>
+        <div *ngIf="displayTopTrack">
+            <h2>Top Tracks</h2>
+            <mat-card class="card-album" *ngFor="let topTrack of topTracks; let i = index">
+                <div *ngIf="i < 3">
+                    <mat-card-header>
+                        <mat-card-title>{{topTrack.name}}</mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image src="{{topTrack.album.images[0].url}}" alt="topTrack">
+                </div>
+            </mat-card>
+        </div>
+    </mat-card>
+
+    <mat-card *ngIf="displaySimilar || displayDiscography">
+        <mat-card-actions>
+            <button mat-raised-button color="primary" routerLink="/search-artist">Search an Other Artist</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
